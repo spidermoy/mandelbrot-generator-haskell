@@ -1,0 +1,21 @@
+cabal-version: 3.0
+name:          MandelbrotGenerator
+synopsis:      A fractal generator written in Haskell
+version:       0.1.0.0
+author:        Cenobio Moisés Vázquez Reyes
+maintainer:    spidermoy@ciencias.unam.mx
+
+executable MandelbrotGenerator
+  main-is:          Main.hs
+  other-modules:    CNumbers,
+                    Julia,
+                    Mandelbrot
+  hs-source-dirs:   src
+  ghc-options:      -Wall
+                    -fno-warn-type-defaults
+                    -O2
+  build-depends:    base >=4,
+                    array,
+                    --sudo apt-get install libdevil-dev
+                    Codec-Image-DevIL
+  default-language: Haskell2010
