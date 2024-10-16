@@ -1,14 +1,13 @@
 module Main where
 
 import System.Environment(getArgs)
-import Codec.Image.DevIL(Word8, ilInit, writeImage)
-import Data.Array.Unboxed(UArray, listArray)
+import Codec.Image.DevIL(ilInit, writeImage)
+import Data.Array.Unboxed(listArray)
 
 import CNumbers(c1, c2, c3, c4, c5, c6, plano)
 import Julia(juliaSet)
 import Mandelbrot(mandelbrotSet)
 
-type Image = UArray (Int, Int, Int) Word8
 
 main::IO ()
 main = do
@@ -33,7 +32,7 @@ main = do
                             "julia-c6"   -> juliaSet c6
                             _            -> const []) . plano)
                             (fromIntegral image_size)
-            image      = listArray size [p | p <- pixels, _ <- [0 .. 3]] :: Image
+            image      = listArray size $ concatMap (replicate 4) pixels
         putStrLn "generating image..."
         writeImage (fractal_type ++ "_" ++ input_size ++ ".jpg") image
         putStrLn "done"
